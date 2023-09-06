@@ -51,4 +51,31 @@ describe ConnectFour do
       end
     end
   end
+
+  describe "#verify" do
+    subject(:game_verify) { described_class.new } 
+    context "when given invalid column" do 
+      it "returns nil" do
+        invalid_column = 9
+        result = game_board.verify(invalid_column)
+        expect(result).to eq nil
+      end
+    end
+
+    context "when given invalid column" do 
+      it "returns nil" do
+        invalid_column = 'Q'
+        result = game_board.verify(invalid_column)
+        expect(result).to eq nil
+      end
+    end
+
+    context "when given valid column" do 
+      it "returns given column" do
+        valid_column = 5
+        result = game_board.verify(valid_column)
+        expect(result).to eq valid_column
+      end
+    end
+  end
 end
