@@ -142,4 +142,34 @@ describe ConnectFour do
       end
     end
   end
+
+  describe "#vacant?" do
+    subject(:game_columns) { described_class.new }
+    context "when a column is fully filled" do
+      before do 
+        column = 3
+        board = game_columns.instance_variable_get(:@board)
+        board[column - 1].each_index { |i| board[column - 1][i] = '●'}
+      end
+      it "returns true" do
+        column = 3
+        target = game_columns.vacant?(column)
+        expect(target).to be false
+      end
+    end
+    
+    context "when a column is in-completely filled" do
+      before do 
+        column = 3
+        board = game_columns.instance_variable_get(:@board)
+        board[column - 1].each_index { |i| board[column - 1][i] = '●' if i < 4 }
+      end
+      it "returns false" do
+        column = 3
+        target = game_columns.vacant?(column)
+        expect(target).to be false
+      end
+    end
+
+  end
 end
