@@ -34,7 +34,7 @@ describe ConnectFour do
         board = game_piece.instance_variable_get(:@board)
         column = 1
         piece = '●'
-        target = board[column - 1][-1]
+        target = board[5][0]
         expect(target).to eq(piece)
         game_board.place_piece(column, piece)
       end
@@ -45,7 +45,7 @@ describe ConnectFour do
         board = game_piece.instance_variable_get(:@board)
         column = 4
         piece = '○'
-        target = board[column - 1][2]
+        target = board[2][3]
         expect(target).to eq(piece)
         game_board.place_piece(column, piece)
       end
