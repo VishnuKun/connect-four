@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# spec/connect_four_spec.rb 
+
+# spec/connect_four_spec.rb
 
 require 'connect_four'
 require 'spec_helper'
@@ -82,8 +83,8 @@ describe ConnectFour do
 
   describe '#game_over?' do
     subject(:game_over) { described_class.new }
-    context "when method finds winning pattern in first column" do
-      it "returns true" do
+    context 'when method finds winning pattern in first column' do
+      it 'returns true' do
         board = [
           ['+', '●', '●', '●', '●', '+'],
           ['+', '+', '+', '+', '+', '+'],
@@ -97,8 +98,8 @@ describe ConnectFour do
       end
     end
 
-    context "when method finds winning pattern across column 3 & 6 horizontally" do
-      it "returns true" do
+    context 'when method finds winning pattern across column 3 & 6 horizontally' do
+      it 'returns true' do
         board = [
           ['+', '+', '+', '+', '+', '+'],
           ['+', '+', '+', '+', '+', '+'],
@@ -112,8 +113,8 @@ describe ConnectFour do
       end
     end
 
-    context "when method finds winning pattern across column 1 & 4 diagonally" do
-      it "returns true" do
+    context 'when method finds winning pattern across column 1 & 4 diagonally' do
+      it 'returns true' do
         board = [
           ['+', '●', '+', '+', '+', '+'],
           ['+', '+', '●', '+', '+', '+'],
@@ -127,8 +128,8 @@ describe ConnectFour do
       end
     end
 
-    context "when method finds no winning pattern " do
-      it "returns false" do
+    context 'when method finds no winning pattern ' do
+      it 'returns false' do
         board = [
           ['+', '●', '+', '+', '+', '+'],
           ['+', '+', '○', '+', '+', '+'],
@@ -143,33 +144,32 @@ describe ConnectFour do
     end
   end
 
-  describe "#vacant?" do
+  describe '#vacant?' do
     subject(:game_columns) { described_class.new }
-    context "when a column is fully filled" do
-      before do 
+    context 'when a column is fully filled' do
+      before do
         column = 3
         board = game_columns.instance_variable_get(:@board)
-        board[column - 1].each_index { |i| board[column - 1][i] = '●'}
+        board[column - 1].each_index { |i| board[column - 1][i] = '●' }
       end
-      it "returns true" do
-        column = 3
-        target = game_columns.vacant?(column)
-        expect(target).to be false
-      end
-    end
-    
-    context "when a column is in-completely filled" do
-      before do 
-        column = 3
-        board = game_columns.instance_variable_get(:@board)
-        board[column - 1].each_index { |i| board[column - 1][i] = '●' if i < 4 }
-      end
-      it "returns false" do
+      it 'returns true' do
         column = 3
         target = game_columns.vacant?(column)
         expect(target).to be false
       end
     end
 
+    context 'when a column is in-completely filled' do
+      before do
+        column = 4
+        board = game_columns.instance_variable_get(:@board)
+        board[column - 1].each_index { |i| board[column - 1][i] = '●' if i < 4 }
+      end
+      it 'returns true' do
+        column = 4
+        target = game_columns.vacant?(column)
+        expect(target).to be true
+      end
+    end
   end
 end
