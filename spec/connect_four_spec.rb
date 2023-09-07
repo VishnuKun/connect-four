@@ -11,8 +11,6 @@ describe ConnectFour do
     context 'when invoked' do
       it 'should display the board' do
         board = <<-BOARD
-        Current board status :-
-
         | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
         |---|---|---|---|---|---|---|
         | + | + | + | + | + | + | + |
