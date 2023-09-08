@@ -31,23 +31,26 @@ describe ConnectFour do
     subject(:game_piece) { described_class.new }
     context 'when given 1st gate' do
       it 'should place the piece(●) correctly on 1st column last line' do
-        board = game_piece.instance_variable_get(:@board)
         column = 1
         piece = '●'
+        board = game_piece.instance_variable_get(:@board)
+        game_piece.place_piece(column, piece)
         target = board[5][0]
         expect(target).to eq(piece)
-        game_board.place_piece(column, piece)
       end
     end
 
     context 'when given 4th gate' do
       it 'should place the piece(○) correctly on 4th column 3rd line' do
-        board = game_piece.instance_variable_get(:@board)
         column = 4
         piece = '○'
+        board = game_piece.instance_variable_get(:@board)
+        board[3][3] = '○'
+        board[4][3] = '●'
+        board[5][3] = '○'
+        game_piece.place_piece(column, piece)
         target = board[2][3]
         expect(target).to eq(piece)
-        game_board.place_piece(column, piece)
       end
     end
   end
