@@ -37,14 +37,13 @@ class ConnectFour
    
   # adds the player's respective mark/piece on the board
   def place_piece(column, piece)
-    board = @board
     @board.reverse.each_index do |row|
       target = @board[row][column-1]
       if target == '+' 
         @board[row][column-1] = piece
+        @board.reverse!
         break
       end
     end
-    @board.reverse!
   end
 end
