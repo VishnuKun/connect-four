@@ -60,7 +60,7 @@ describe ConnectFour do
     context 'when given invalid column' do
       it 'returns nil' do
         invalid_column = 9
-        result = game_board.verify(invalid_column)
+        result = game_verify.verify(invalid_column)
         expect(result).to eq nil
       end
     end
@@ -68,7 +68,7 @@ describe ConnectFour do
     context 'when given invalid column' do
       it 'returns nil' do
         invalid_column = 'Q'
-        result = game_board.verify(invalid_column)
+        result = game_verify.verify(invalid_column)
         expect(result).to eq nil
       end
     end
@@ -76,7 +76,7 @@ describe ConnectFour do
     context 'when given valid column' do
       it 'returns given column' do
         valid_column = 5
-        result = game_board.verify(valid_column)
+        result = game_verify.verify(valid_column)
         expect(result).to eq valid_column
       end
     end
