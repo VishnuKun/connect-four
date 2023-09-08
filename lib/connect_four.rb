@@ -46,4 +46,9 @@ class ConnectFour
       end
     end
   end
+
+  # verifies the column given by players
+  def verify(column)
+    column.is_a?(Integer) ? (column.between?(1, 7) ? column : nil) : nil
+  end
 end
