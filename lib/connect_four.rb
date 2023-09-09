@@ -147,4 +147,17 @@ class ConnectFour
     end
     return false
   end
+
+  # Checks whether one column is completely  filled or not
+  def vacant?(column)
+    # get all cells in the column
+    marks = []
+    row_index = 0
+    while row_index < 6
+      marks << @board[row_index][column - 1]
+      row_index += 1
+    end
+    return false if marks.all? { |mark| mark == marks[0] && mark[0] != '+' }
+    true
+  end
 end
