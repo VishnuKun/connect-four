@@ -147,7 +147,7 @@ describe ConnectFour do
       before do
         column = 3
         board = game_columns.instance_variable_get(:@board)
-        board[column - 1].each_index { |i| board[column - 1][i] = '●' }
+        board.each_index { |i| board[i][column - 1] = '●' }
       end
       it 'returns true' do
         column = 3
@@ -160,7 +160,7 @@ describe ConnectFour do
       before do
         column = 4
         board = game_columns.instance_variable_get(:@board)
-        board[column - 1].each_index { |i| board[column - 1][i] = '●' if i < 4 }
+        board.each_index { |i| board[i][column - 1] = '●' if i < 4 }
       end
       it 'returns true' do
         column = 4
