@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Connect Four Game
-
+# ConnectFour
 class ConnectFour
   attr_accessor :board
 
@@ -57,7 +57,7 @@ class ConnectFour
   # checks for any winning patterns in the current board
   def game_over?(board)
     winning_combinations = [
-      # rows - 
+      # rows -
       [[0, 0], [0, 1], [0, 2], [0, 3]], # first row
       [[0, 1], [0, 2], [0, 3], [0, 4]],
       [[0, 2], [0, 3], [0, 4], [0, 5]],
@@ -88,7 +88,7 @@ class ConnectFour
       [[5, 2], [5, 3], [5, 4], [5, 5]],
       [[5, 3], [5, 4], [5, 5], [5, 6]],
 
-      # columns 
+      # columns
       [[0, 0], [1, 0], [2, 0], [3, 0]], # first column
       [[1, 0], [2, 0], [3, 0], [4, 0]],
       [[2, 0], [3, 0], [4, 0], [5, 0]],
@@ -117,7 +117,7 @@ class ConnectFour
       [[1, 6], [2, 6], [3, 6], [4, 6]],
       [[2, 6], [3, 6], [4, 6], [5, 6]],
 
-      # diagonals 
+      # diagonals
       [[0, 0], [1, 1], [2, 2], [3, 3]], # from first row
       [[0, 1], [1, 2], [2, 3], [3, 4]],
       [[0, 2], [1, 3], [2, 4], [3, 5]],
@@ -142,7 +142,7 @@ class ConnectFour
       [[2, 1], [3, 2], [4, 3], [5, 4]],
       [[2, 2], [3, 3], [4, 4], [5, 5]],
       [[2, 3], [3, 4], [4, 5], [5, 6]],
-      
+
       [[2, 3], [3, 2], [4, 1], [5, 0]],
       [[2, 4], [3, 3], [4, 2], [5, 1]],
       [[2, 5], [3, 4], [4, 3], [5, 2]],
@@ -153,12 +153,11 @@ class ConnectFour
       marks = combination.map { |row_index, column_index| board[row_index][column_index] }
       return true if marks.uniq.length == 1 && marks[0] != '+'
     end
-    return false
+    false
   end
 
   # Checks whether one column is completely  filled or not
   def vacant?(column)
-    # get all cells in the column
     marks = []
     row_index = 0
     while row_index < 6
@@ -166,76 +165,65 @@ class ConnectFour
       row_index += 1
     end
     return false if marks.all? { |mark| mark == marks[0] && mark[0] != '+' }
+
     true
   end
 
   # starts the game
   def play_game
-    # first provide an intro to the users
     intro
-    # print board
     display_board
     puts ''
-    puts "    > Well then lets start the game!" 
+    puts '    > Well then lets start the game!'
     puts ''
-    # ask the player's name and display their mark as well 
-    print "    > ● Enter your name player1 : " 
+    print '    > ● Enter your name player1 : '
     player1 = gets.chomp
-    print "    > ○ Enter your name player2 : "
+    print '    > ○ Enter your name player2 : '
     player2 = gets.chomp
     puts ''
 
     turns = 1
     current_player = nil
     current_mark = nil
-    # keep asking each user until one wins or the board is filled completely
     while turns < 43
-      turns.odd? ? ((current_player = player1) && (current_mark = '●')) : ((current_player = player2) && (current_mark = '○')) 
+      turns.odd? ? ((current_player = player1) && (current_mark = '●')) : ((current_player = player2) && (current_mark = '○'))
 
-      # display current player's name and ask for the column to drop piece into
       print "    #{current_player} select a column to drop your piece(#{current_mark}) into : "
       column = gets.chomp
       puts ''
-      # verify that the column is between 1 and 7 only
-      # if not ask again with error message
       while true
         column = column.to_i
-        if !column.between?(1, 7)
-          puts "    Invalid column! Please enter a number between 1 and 7 only!"
-          puts ''
-          print "   #{current_player} select a column to drop your piece(#{current_mark}) into : "
-          column = gets.chomp
-        else
-          break
-        end
+        break if column.between?(1, 7)
+
+        puts '    Invalid column! Please enter a number between 1 and 7 only!'
+        puts ''
+        print "   #{current_player} select a column to drop your piece(#{current_mark}) into : "
+        column = gets.chomp
+
       end
 
-      # place the piece into the board
       place_piece(column, current_mark)
-      # display the board again
       display_board
-      # check if there are any winning patterns
       result = game_over?(@board)
-      if result 
+      if result
         puts ''
         puts "    Game Over! #{current_player} won! "
         break
       end
-      # add 1 to turns each time
       turns += 1
     end
   end
-   
-  # provides a brief introduction 
-  def intro 
-    intro = <<-Introduction
+
+  # provides a brief introduction
+  def intro
+    intro = <<-INTRODUCTION
     > Welcome to the game Connect Four!
-    > In this game both of the players takes turns dropping their pieces into the board. 
+    > In this game both of the players takes turns dropping their pieces into the board.#{' '}
     > To drop your piece into a column just give the column number at your turn.
     > Player who manages to drop 4 consecutive pieces, either horizontally, vertically or diagonally wins the game.
-    > The board will look like this: 
+    > The board will look like this:#{' '}
 
-    Introduction
-    puts intro 
+    INTRODUCTION
+    puts intro
   end
 end
